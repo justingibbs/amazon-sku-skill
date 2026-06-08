@@ -8,6 +8,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -18,6 +19,11 @@ except ImportError:
 
 MOCK_PATH = Path(__file__).resolve().parent.parent / "data" / "mock_competitors.json"
 SERPAPI_ENDPOINT = "https://serpapi.com/search.json"
+
+
+def _redact(text: str) -> str:
+    """Strip api_key=... from any text so the key never reaches logs or stderr."""
+    return re.sub(r"(api_key=)[^&\s'\"]+", r"\1[REDACTED]", text)
 
 
 def load_env() -> None:
@@ -62,7 +68,7 @@ def search_serpapi(query: str, limit: int) -> list[dict] | None:
         )
         resp.raise_for_status()
     except Exception as e:
-        print(f"WARN: SerpApi failed ({e}); falling back to mock data", file=sys.stderr)
+        print(f"WARN: SerpApi failed ({_redact(str(e))}); falling back to mock data", file=sys.stderr)
         return None
 
     data = resp.json()
