@@ -10,6 +10,7 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 
 try:
@@ -19,6 +20,9 @@ except ImportError:
 
 MOCK_PATH = Path(__file__).resolve().parent.parent / "data" / "mock_competitors.json"
 SERPAPI_ENDPOINT = "https://serpapi.com/search.json"
+
+SERPAPI_TIMEOUT_SECONDS = 45
+RETRY_BACKOFF_SECONDS = [1, 3, 8]  # sleep before attempts 2, 3, 4 (max 4 attempts)
 
 
 def _redact(text: str) -> str:
@@ -55,23 +59,38 @@ def search_serpapi(query: str, limit: int) -> list[dict] | None:
         print("WARN: 'requests' not installed; falling back to mock data",
               file=sys.stderr)
         return None
-    try:
-        resp = requests.get(
-            SERPAPI_ENDPOINT,
-            params={
-                "engine": "amazon",
-                "k": query,
-                "amazon_domain": "amazon.com",
-                "api_key": api_key,
-            },
-            timeout=20,
-        )
-        resp.raise_for_status()
-    except Exception as e:
-        print(f"WARN: SerpApi failed ({_redact(str(e))}); falling back to mock data", file=sys.stderr)
-        return None
+    max_attempts = len(RETRY_BACKOFF_SECONDS) + 1
+    for attempt in range(1, max_attempts + 1):
+        try:
+            resp = requests.get(
+                SERPAPI_ENDPOINT,
+                params={
+                    "engine": "amazon",
+                    "k": query,
+                    "amazon_domain": "amazon.com",
+                    "api_key": api_key,
+                },
+                timeout=SERPAPI_TIMEOUT_SECONDS,
+            )
+            if 400 <= resp.status_code < 500:
+                print(f"WARN: SerpApi returned {resp.status_code} (terminal); "
+                      f"falling back to mock data", file=sys.stderr)
+                return None
+            resp.raise_for_status()
+            data = resp.json()
+            break
+        except Exception as e:
+            if attempt < max_attempts:
+                sleep_for = RETRY_BACKOFF_SECONDS[attempt - 1]
+                print(f"WARN: SerpApi search attempt {attempt}/{max_attempts} "
+                      f"failed ({_redact(str(e))}); retrying in {sleep_for}s",
+                      file=sys.stderr)
+                time.sleep(sleep_for)
+                continue
+            print(f"WARN: SerpApi search failed after {max_attempts} attempts "
+                  f"({_redact(str(e))}); falling back to mock data", file=sys.stderr)
+            return None
 
-    data = resp.json()
     organic = data.get("organic_results", []) or []
     results = []
     for item in organic[:limit]:

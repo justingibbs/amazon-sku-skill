@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
 """Fetch a single Amazon product listing's title, bullets, and description.
 
+Always exits 0 and emits a JSON object with a top-level "status" field:
+- "ok"      — fields populated; "source" indicates origin
+- "no_data" — nothing returned; "reason" indicates why
+
+This lets parallel callers continue when a single fetch fails. Diagnostic
+detail goes to stderr.
+
 Usage:
     python fetch_listing.py --asin B09XS7JWHH
+    python fetch_listing.py --asin B09XS7JWHH --no-cache
 """
 
 import argparse
+import datetime as _dt
 import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 
 try:
@@ -17,8 +27,14 @@ try:
 except ImportError:
     requests = None
 
-MOCK_PATH = Path(__file__).resolve().parent.parent / "data" / "mock_competitors.json"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+MOCK_PATH = DATA_DIR / "mock_competitors.json"
+CACHE_DIR = DATA_DIR / ".cache" / "listings"
 SERPAPI_ENDPOINT = "https://serpapi.com/search.json"
+
+SERPAPI_TIMEOUT_SECONDS = 45
+RETRY_BACKOFF_SECONDS = [1, 3, 8]  # sleep before attempts 2, 3, 4 (max 4 attempts)
+CACHE_TTL_SECONDS = 7 * 24 * 3600
 
 
 def _redact(text: str) -> str:
@@ -44,48 +60,123 @@ def load_env() -> None:
             return
 
 
+def _cache_path(asin: str) -> Path:
+    return CACHE_DIR / f"{asin}.json"
+
+
+def load_cache(asin: str) -> dict | None:
+    """Return cached listing if present and fresh, else None.
+
+    Cached entries surface as source="serpapi_cache" so downstream consumers
+    can distinguish a cached live fetch from a true live fetch.
+    """
+    path = _cache_path(asin)
+    if not path.exists():
+        return None
+    try:
+        with path.open() as f:
+            entry = json.load(f)
+        fetched_at = _dt.datetime.fromisoformat(entry["fetched_at"])
+        age = (_dt.datetime.now(_dt.timezone.utc) - fetched_at).total_seconds()
+        if age > CACHE_TTL_SECONDS:
+            return None
+        data = dict(entry["data"])
+        if data.get("source") == "serpapi":
+            data["source"] = "serpapi_cache"
+        return data
+    except Exception as e:
+        print(f"WARN: cache read failed for {asin} ({e})", file=sys.stderr)
+        return None
+
+
+def save_cache(asin: str, data: dict) -> None:
+    """Persist successful SerpApi fetches. Failures here are non-fatal."""
+    try:
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        entry = {
+            "asin": asin,
+            "fetched_at": _dt.datetime.now(_dt.timezone.utc).isoformat(),
+            "data": data,
+        }
+        with _cache_path(asin).open("w") as f:
+            json.dump(entry, f)
+    except Exception as e:
+        print(f"WARN: cache write failed for {asin} ({e})", file=sys.stderr)
+
+
 def fetch_serpapi(asin: str) -> dict | None:
-    """Fetch full product details via SerpApi's amazon_product engine."""
+    """Fetch product details via SerpApi with retry-with-backoff.
+
+    Returns parsed listing dict on success, None on permanent failure.
+    Retries on timeout, connection error, and 5xx; surfaces 4xx immediately.
+    """
     api_key = os.environ.get("SERPAPI_API_KEY")
     if not api_key:
         print("WARN: SERPAPI_API_KEY not set (checked environment and .env); "
-              "falling back to mock data", file=sys.stderr)
+              "falling back to cache or mock", file=sys.stderr)
         return None
     if requests is None:
-        print("WARN: 'requests' not installed; falling back to mock data",
+        print("WARN: 'requests' not installed; falling back to cache or mock",
               file=sys.stderr)
         return None
-    try:
-        resp = requests.get(
-            SERPAPI_ENDPOINT,
-            params={
-                "engine": "amazon_product",
-                "asin": asin,
-                "amazon_domain": "amazon.com",
-                "api_key": api_key,
-            },
-            timeout=20,
-        )
-        resp.raise_for_status()
-    except Exception as e:
-        print(
-            f"WARN: SerpApi product fetch failed ({_redact(str(e))}); falling back to mock",
-            file=sys.stderr,
-        )
-        return None
 
-    data = resp.json()
+    max_attempts = len(RETRY_BACKOFF_SECONDS) + 1
+    for attempt in range(1, max_attempts + 1):
+        try:
+            resp = requests.get(
+                SERPAPI_ENDPOINT,
+                params={
+                    "engine": "amazon_product",
+                    "asin": asin,
+                    "amazon_domain": "amazon.com",
+                    "api_key": api_key,
+                },
+                timeout=SERPAPI_TIMEOUT_SECONDS,
+            )
+            # Treat 4xx as terminal (bad request, auth, quota), 5xx as retryable
+            if 400 <= resp.status_code < 500:
+                print(f"WARN: SerpApi returned {resp.status_code} for {asin} (terminal); "
+                      f"falling back to cache or mock", file=sys.stderr)
+                return None
+            resp.raise_for_status()
+            data = resp.json()
+            break
+        except Exception as e:
+            if attempt < max_attempts:
+                sleep_for = RETRY_BACKOFF_SECONDS[attempt - 1]
+                print(f"WARN: SerpApi product fetch attempt {attempt}/{max_attempts} "
+                      f"failed for {asin} ({_redact(str(e))}); retrying in {sleep_for}s",
+                      file=sys.stderr)
+                time.sleep(sleep_for)
+                continue
+            print(f"WARN: SerpApi product fetch failed for {asin} after "
+                  f"{max_attempts} attempts ({_redact(str(e))}); falling back to "
+                  f"cache or mock", file=sys.stderr)
+            return None
+
     pd = data.get("product_results") or {}
     specs = data.get("item_specifications") or {}
+    title = pd.get("title")
+    bullets = data.get("about_item") or []
+    # SerpApi sometimes returns 200 OK with an empty product_results dict for
+    # unknown / dead ASINs. Detect that here so we don't surface a hollow "ok".
+    if not title and not bullets:
+        print(f"WARN: SerpApi returned 200 but no product fields for {asin}; "
+              f"treating as not found", file=sys.stderr)
+        return None
     # product_description is sometimes a plain string, sometimes a list of A+ Content
     # card dicts (image-based marketing, no useful text). Only treat strings as the description.
     desc_raw = data.get("product_description")
     description = desc_raw if isinstance(desc_raw, str) else ""
+    description_format = "text" if description else (
+        "a_plus_content" if isinstance(desc_raw, list) and desc_raw else "empty"
+    )
     return {
         "asin": asin,
-        "title": pd.get("title"),
-        "bullets": data.get("about_item") or [],
+        "title": title,
+        "bullets": bullets,
         "description": description,
+        "description_format": description_format,
         "brand": specs.get("brand") or pd.get("brand"),
         "rating": pd.get("rating"),
         "reviews": pd.get("reviews"),
@@ -96,8 +187,12 @@ def fetch_serpapi(asin: str) -> dict | None:
 
 def fetch_mock(asin: str) -> dict | None:
     """Look up the ASIN in mock data across all categories."""
-    with MOCK_PATH.open() as f:
-        mock = json.load(f)
+    try:
+        with MOCK_PATH.open() as f:
+            mock = json.load(f)
+    except Exception as e:
+        print(f"WARN: mock data unreadable ({e})", file=sys.stderr)
+        return None
     for items in mock.values():
         for item in items:
             if item.get("asin") == asin:
@@ -110,14 +205,35 @@ def fetch_mock(asin: str) -> dict | None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Fetch Amazon listing details")
     parser.add_argument("--asin", required=True, help="ASIN to fetch")
+    parser.add_argument("--no-cache", action="store_true",
+                        help="Skip cache lookup on SerpApi failure (still writes cache on success)")
     args = parser.parse_args()
 
     load_env()
-    listing = fetch_serpapi(args.asin) or fetch_mock(args.asin)
+
+    listing = fetch_serpapi(args.asin)
+    if listing:
+        save_cache(args.asin, listing)
+    elif not args.no_cache:
+        cached = load_cache(args.asin)
+        if cached:
+            print(f"INFO: serving cached SerpApi data for {args.asin}", file=sys.stderr)
+            listing = cached
+
     if not listing:
-        print(f"ERROR: No data found for ASIN {args.asin}", file=sys.stderr)
-        return 1
-    print(json.dumps(listing, indent=2))
+        listing = fetch_mock(args.asin)
+
+    if listing:
+        output = {"status": "ok", **listing}
+    else:
+        output = {
+            "status": "no_data",
+            "asin": args.asin,
+            "reason": "asin_not_in_mock_set",
+            "source": None,
+        }
+
+    print(json.dumps(output, indent=2))
     return 0
 
 
