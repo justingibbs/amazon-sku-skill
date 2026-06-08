@@ -1,10 +1,11 @@
 # Architecture
 
-Three diagrams. Read top-to-bottom.
+Four sections. Read top-to-bottom.
 
 1. **Workflow** — what happens from the moment a user types an "audit" prompt
 2. **Data-source decision** — how `fetch_listing.py` chooses between live SerpApi, local cache, and mock
 3. **File layout** — where every file lives and which script touches it
+4. **User-facing prompts** — the verbatim text Claude shows the user at each pause point, plus how the intent answer biases later steps
 
 Legend: `[Claude]` = LLM reasoning, `[Python: <script>]` = deterministic script, `[USER]` = pauses for user input.
 
@@ -221,3 +222,46 @@ amazon-sku-skill/
 **Generated artifacts:** `output/*.md` (recommendation summaries), `data/.cache/listings/*.json` (SerpApi cache). Both gitignored.
 
 **Secrets:** `.env` holds `SERPAPI_API_KEY` and is gitignored; `.env.example` documents the variable without the value.
+
+---
+
+## 4. User-facing prompts
+
+The skill pauses the LLM at two points to wait for the user. These are the verbatim strings Claude is instructed to present (from `.claude/skills/competitor-content-intelligence/SKILL.md`).
+
+### Step 2 — Intent question
+
+Claude asks (verbatim, or close to it):
+
+```
+What's your goal for this audit?
+1. Improve search ranking — make the listing more discoverable
+2. Increase conversion — make shoppers more likely to buy once they land on the page
+3. Ensure Amazon compliance — fix anything that violates Amazon's content rules
+4. All of the above
+```
+
+Claude does not proceed to Step 3 until the user picks one. The answer biases Steps 4 and 5:
+
+| Answer | What gets prioritized in recommendations |
+|---|---|
+| #1 Search ranking | Keyword density in titles, attribute coverage, search-relevant terms in bullets |
+| #2 Conversion | Benefit-first bullet structure, descriptive depth, scannability, social-proof-adjacent specs (battery hours, warranty, included items) |
+| #3 Compliance | Rule violations (banned terms, ALL CAPS, special characters, prohibited claims) |
+| #4 All | Balance across all three |
+
+### Step 6 — Approval question
+
+After Claude presents the top 3 edits, it asks (verbatim):
+
+```
+Approve these edits as-is? (approve / revise <which one> / regenerate all)
+```
+
+Reply semantics:
+
+- `approve` — Claude proceeds to Step 7 and writes the final summary
+- `revise <N>` — Claude iterates on edit N only and re-asks
+- `regenerate all` — Claude discards all three edits and produces a new set
+
+Claude does not write `output/<SKU>_recommendation_<YYYYMMDD>.md` until the user explicitly approves.

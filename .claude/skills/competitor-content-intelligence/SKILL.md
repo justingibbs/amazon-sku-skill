@@ -92,9 +92,9 @@ Generate the **top 3 highest-impact edits** to the Ally SKU. For each edit:
 3. **After** — the proposed rewrite
 4. **Why** — tie to the user's stated intent from Step 2
 5. **Competitor reference** — "Competitor 2 (Sony WH-1000XM5) leads with battery life as their second bullet, which their reviewers cite repeatedly"
-6. **Amazon rule citation** — the specific rule from `data/amazon_content_guidelines.md` with its source URL
+6. **Amazon rule citation** — the specific rule from `<project-root>/data/amazon_content_guidelines.md` with its source URL
 
-Use Read to load `data/amazon_content_guidelines.md` before generating recommendations so you can cite specific rules with their URLs. Do **not** invent rules from training-data memory.
+Use Read to load `<project-root>/data/amazon_content_guidelines.md` (i.e. the `data/` directory at the project root, NOT the skill's own `data/` subdirectory) before generating recommendations so you can cite specific rules with their URLs. Do **not** invent rules from training-data memory.
 
 ### Step 6 — Get user approval
 
@@ -121,12 +121,14 @@ After writing, print the file path and a 2-sentence summary of what changed.
 
 - **Always cite the Amazon rule URL inline** next to each recommendation. No exceptions.
 - **Never invent a competitor.** If `find_competitors.py` returns mock data, say so explicitly.
-- **Don't quote Amazon rules from training memory.** Load `data/amazon_content_guidelines.md` and cite from there.
+- **Don't quote Amazon rules from training memory.** Load `<project-root>/data/amazon_content_guidelines.md` and cite from there.
 - **Don't recommend edits that violate Amazon's rules** (e.g., adding "Free shipping" or "Best Seller" to the title).
 - **Don't skip Step 2 or Step 6.** Intent and approval are core to the product.
 
 ## Reference files
 
-- `data/ally_skus.csv` — Ally's product catalog (input)
-- `data/amazon_content_guidelines.md` — Compiled Amazon rules with source URLs (load via Read when generating recommendations)
-- `.claude/skills/competitor-content-intelligence/data/mock_competitors.json` — Fallback competitor data when no SerpApi key is configured
+All paths are relative to the project root (`/Users/justingibbs/Projects/commerIQ_skill/`).
+
+- `data/ally_skus.csv` — Ally's product catalog (input; lives in the project-root `data/`)
+- `data/amazon_content_guidelines.md` — Compiled Amazon rules with source URLs (lives in the project-root `data/`; load via Read when generating recommendations)
+- `.claude/skills/competitor-content-intelligence/data/mock_competitors.json` — Fallback competitor data when no SerpApi key is configured (lives in the skill's own `data/` subdirectory — distinct from the project-root `data/`)
