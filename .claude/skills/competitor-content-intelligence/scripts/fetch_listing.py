@@ -76,12 +76,17 @@ def fetch_serpapi(asin: str) -> dict | None:
 
     data = resp.json()
     pd = data.get("product_results") or {}
+    specs = data.get("item_specifications") or {}
+    # product_description is sometimes a plain string, sometimes a list of A+ Content
+    # card dicts (image-based marketing, no useful text). Only treat strings as the description.
+    desc_raw = data.get("product_description")
+    description = desc_raw if isinstance(desc_raw, str) else ""
     return {
         "asin": asin,
         "title": pd.get("title"),
-        "bullets": pd.get("feature_bullets") or pd.get("about_this_item") or [],
-        "description": pd.get("description") or "",
-        "brand": pd.get("brand"),
+        "bullets": data.get("about_item") or [],
+        "description": description,
+        "brand": specs.get("brand") or pd.get("brand"),
         "rating": pd.get("rating"),
         "reviews": pd.get("reviews"),
         "url": pd.get("link"),
