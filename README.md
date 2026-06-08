@@ -38,6 +38,8 @@ To invoke: start Claude Code in this directory and ask it to audit one of the SK
 
 ## Architecture
 
+For ASCII diagrams of the end-to-end workflow, the data-source fallback (SerpApi → cache → mock), and the file layout with per-script data flow, see [`ARCHITECTURE.md`](./ARCHITECTURE.md).
+
 ```
 amazon-sku-skill/
 ├── .claude/skills/competitor-content-intelligence/

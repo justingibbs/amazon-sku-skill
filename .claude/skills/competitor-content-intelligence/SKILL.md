@@ -55,7 +55,15 @@ For each returned ASIN, fetch full details:
 uv run .claude/skills/competitor-content-intelligence/scripts/fetch_listing.py --asin <ASIN>
 ```
 
-Each script's output includes a `source` field (`serpapi` or `mock`). If `mock`, flag this in the final summary so the user knows the comparison is illustrative.
+`fetch_listing.py` always exits 0 and emits a JSON object with a `status` field:
+- `"ok"` — fields are populated; `source` is `serpapi`, `serpapi_cache`, or `mock`
+- `"no_data"` — the ASIN was not found on SerpApi (live or cached) and isn't in the mock set; `reason` indicates why
+
+If a fetch returns `"no_data"`, retry once (transient SerpApi failures are common; the script already retries 3× internally with backoff, but a second invocation may still help). If a second attempt also returns `"no_data"`, drop that ASIN from the comparison and pull a replacement competitor from the search results instead of using a hollow entry.
+
+You can fetch multiple ASINs in parallel safely — a single failure no longer cancels the other tool calls (each call exits 0 with a structured result).
+
+Track the `source` per ASIN — `serpapi` (live), `serpapi_cache` (served from 7-day local cache), or `mock` (fallback). You will need this in Step 7.
 
 ### Step 4 — Compare
 
@@ -72,6 +80,8 @@ Build a comparison table covering Ally + the 3 competitors:
 | Notable gaps | | | | |
 
 Call out the most striking differences in 1–2 sentences after the table.
+
+**A+ Content caveat for the description row:** SerpApi returns an empty description for any listing where the seller uses Amazon A+ Content (image-based rich descriptions) instead of a text description. The new `description_format` field in each listing distinguishes `"text"`, `"a_plus_content"`, and `"empty"`. When a competitor's `description_format` is `"a_plus_content"`, mark its description row as **"A+ Content (text not extractable)"** rather than "0 chars" — a 0-char reading would falsely inflate Ally's relative description score. Note this caveat in the prose below the table when at least one competitor uses A+ Content.
 
 ### Step 5 — Recommend top 3 edits
 
@@ -103,7 +113,7 @@ Write to `output/<sku_id>_recommendation_<YYYYMMDD>.md` (create the `output/` di
 3. **Approved edits** — for each: before, after, rationale, competitor reference, Amazon rule citation (with URL)
 4. **Paste-ready section** — final title, final bullets (as a list), final description, formatted so the user can copy each field directly into Seller Central
 5. **Sources** — links to all Amazon rule URLs cited
-6. **Data provenance** — note if competitor data came from `serpapi` or `mock`
+6. **Data provenance** — list each competitor ASIN with its `source` (`serpapi`, `serpapi_cache`, or `mock`), not just an aggregate note. Flag any ASINs whose `description_format` is `"a_plus_content"` so the reader knows the description-length comparison was adjusted for that.
 
 After writing, print the file path and a 2-sentence summary of what changed.
 
