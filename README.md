@@ -58,6 +58,54 @@ amazon-sku-skill/
 - **Python scripts** handle deterministic work: CSV parsing, HTTP calls, JSON serialization.
 - **Reference data** (`data/amazon_content_guidelines.md`) is loaded by Claude on demand so it can cite specific rule URLs in every recommendation.
 
+## Data Provenance
+
+The two reference files in `data/` were generated differently — be aware of what's fabricated vs sourced.
+
+### `data/ally_skus.csv` — fully fabricated
+
+Ally Audio is a fictional brand invented for this take-home; the assignment didn't provide a sample SKU catalog, so one was synthesized in an iterative Claude Code session with the product decisions made by me:
+
+- **Brand positioning:** mid-market lifestyle headphones — the gap between budget JLab and premium Bose
+- **Catalog size:** 6 SKUs across the sub-categories a real multi-product audio brand would realistically own — over-ear ANC, true wireless earbuds, on-ear commuter, sport buds, wired studio monitors, kids' headphones
+- **Content quality spread:** deliberately uneven (2 strong, 2 middling, 2 weak) so the skill has both subtle and obvious improvement targets to recommend against. The weak SKUs (`ALY-DASH-SPORT-004`, `ALY-STUDIO-50-005`) are the most useful for showing recommendation depth in a Loom demo
+- **Image URLs:** `picsum.photos/seed/<slug>/800/800` placeholders that actually resolve and are deterministic per SKU
+- **Multi-value fields** (`bullets`, `image_urls`) use `|` as the in-cell delimiter so the CSV stays single-line per row
+
+No real Amazon catalog data was scraped, transferred, or referenced. The brand and SKU names are invented.
+
+### `data/amazon_content_guidelines.md` — compiled from real Amazon sources
+
+The guidelines doc is built from Amazon's own publicly accessible documentation. A Claude Code research agent ran web searches and fetches to extract concrete, citable rules, then compiled them into a single markdown file with source URLs inline so the skill can cite them on every recommendation. Scope is intentionally focused on what the skill actually uses (titles, bullets, descriptions, prohibited content, image basics) — not exhaustive.
+
+**Primary sources** (Amazon-published, publicly accessible — most rules come from these):
+
+- [Amazon Listings — Product Detail Page Guide (PDF)](https://m.media-amazon.com/images/G/35/sp-marketing-toolkit/Sellerfacingguides/Amazon_Listings_Product_Detail_Page_Guide.pdf)
+- [Category Style Guide: Consumer Electronics and Camera & Photo (PDF, Feb 2018)](https://images-na.ssl-images-amazon.com/images/G/01/rainier/help/CEStyleGuide.pdf)
+- [Amazon Seller Forums — New product title requirements effective Jan 21, 2025](https://sellercentral.amazon.com/seller-forums/discussions/t/b2b15728-0d43-453e-974f-59eb63f73059)
+- [Prohibited Seller Activities and Actions Policy (PDF)](https://m.media-amazon.com/images/G/31/rainer/ProhibitedSellerActivitiesandActionsPolicy.pdf)
+
+**Reference sources** (cited by ID; full text behind Seller Central login or JS-rendered, so text was mirrored from the PDFs above):
+
+- [Product title requirements and guidelines (GYTR6SYGFA5E3EQC)](https://sellercentral.amazon.com/help/hub/reference/external/GYTR6SYGFA5E3EQC?locale=en-US)
+- [Product bullet point requirements (GX5L8BF8GLMML6CX)](https://sellercentral.amazon.com/help/hub/reference/external/GX5L8BF8GLMML6CX?locale=en-US)
+- [Product detail page rules (G200390640)](https://sellercentral.amazon.com/help/hub/reference/external/G200390640?locale=en-US)
+- [Product image guide (G1881)](https://sellercentral.amazon.com/help/hub/reference/external/G1881?locale=en-US)
+- [Technical image file requirements (G9FUUH87RBNXGKB7)](https://sellercentral.amazon.com/help/hub/reference/external/G9FUUH87RBNXGKB7?locale=en-US)
+
+**Known conflicts:** the 2018 CE Style Guide and the 2025 Seller Central update disagree on title character limits (150 vs 200). Both are documented inline in `data/amazon_content_guidelines.md` with a note to prefer the newer rule. Third-party blogs and SEO summaries (Helium 10, Jungle Scout) were intentionally avoided as sources so every cited rule traces back to an Amazon-published URL.
+
+## Design Decisions
+
+Key choices made during scaffolding, each with the one-line "why":
+
+1. **Claude Code skill at project level** (`.claude/skills/`) — ships with the repo so a reviewer can `git clone` and run it; user-level (`~/.claude/skills/`) would have been more portable but awkward as a take-home deliverable.
+2. **Python for deterministic work, Claude for reasoning** — scripts handle CSV parsing and HTTP; Claude handles intent capture, comparison, recommendation generation, summarization. Plays to each tool's strengths and keeps the prompt (SKILL.md) focused on judgement rather than plumbing.
+3. **SerpApi for live data with mock fallback** — real Amazon results when `SERPAPI_API_KEY` is set, bundled mock JSON when not. Live data sells the demo; mocks make it reproducible (and work offline on the reviewer's machine without requiring them to sign up for an API key).
+4. **Fixed intent menu, not free-text** — the skill asks "search ranking / conversion / compliance / all" before recommending. Each intent biases the output differently. Free-text was considered but felt less predictable for a 3–6 minute Loom demo.
+5. **Read-only CSV; recommendations emitted to `output/`** — the skill never mutates `data/ally_skus.csv`. Cleaner separation, and treats Ally's catalog as a snapshot of Seller Central rather than a working file the skill owns. A write-through mode could be added later.
+6. **Inline rule citations with URLs on every recommendation** — the skill loads `data/amazon_content_guidelines.md` on demand and cites specific rules with their source URLs. This prevents Claude from quoting Amazon rules from training memory, which could be stale or wrong.
+
 ## Product brief
 
 **Who:** Ally Audio listing managers (or the Ally AI teammate acting on their behalf) who own product detail pages in Amazon Seller Central.
