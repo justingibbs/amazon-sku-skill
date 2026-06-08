@@ -20,10 +20,34 @@ MOCK_PATH = Path(__file__).resolve().parent.parent / "data" / "mock_competitors.
 SERPAPI_ENDPOINT = "https://serpapi.com/search.json"
 
 
+def load_env() -> None:
+    """Load KEY=VALUE pairs from the repo-root .env into os.environ.
+
+    Walks upward from this script until it finds a .env file. Existing
+    environment variables win; .env only fills in what is missing.
+    """
+    for parent in Path(__file__).resolve().parents:
+        env_path = parent / ".env"
+        if env_path.exists():
+            for line in env_path.read_text().splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                os.environ.setdefault(key.strip(), value.strip())
+            return
+
+
 def fetch_serpapi(asin: str) -> dict | None:
     """Fetch full product details via SerpApi's amazon_product engine."""
     api_key = os.environ.get("SERPAPI_API_KEY")
-    if not api_key or requests is None:
+    if not api_key:
+        print("WARN: SERPAPI_API_KEY not set (checked environment and .env); "
+              "falling back to mock data", file=sys.stderr)
+        return None
+    if requests is None:
+        print("WARN: 'requests' not installed; falling back to mock data",
+              file=sys.stderr)
         return None
     try:
         resp = requests.get(
@@ -77,6 +101,7 @@ def main() -> int:
     parser.add_argument("--asin", required=True, help="ASIN to fetch")
     args = parser.parse_args()
 
+    load_env()
     listing = fetch_serpapi(args.asin) or fetch_mock(args.asin)
     if not listing:
         print(f"ERROR: No data found for ASIN {args.asin}", file=sys.stderr)

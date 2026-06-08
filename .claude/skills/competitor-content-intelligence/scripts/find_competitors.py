@@ -20,10 +20,34 @@ MOCK_PATH = Path(__file__).resolve().parent.parent / "data" / "mock_competitors.
 SERPAPI_ENDPOINT = "https://serpapi.com/search.json"
 
 
+def load_env() -> None:
+    """Load KEY=VALUE pairs from the repo-root .env into os.environ.
+
+    Walks upward from this script until it finds a .env file. Existing
+    environment variables win; .env only fills in what is missing.
+    """
+    for parent in Path(__file__).resolve().parents:
+        env_path = parent / ".env"
+        if env_path.exists():
+            for line in env_path.read_text().splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                os.environ.setdefault(key.strip(), value.strip())
+            return
+
+
 def search_serpapi(query: str, limit: int) -> list[dict] | None:
     """Search via SerpApi. Returns None if no key, no requests, or HTTP error."""
     api_key = os.environ.get("SERPAPI_API_KEY")
-    if not api_key or requests is None:
+    if not api_key:
+        print("WARN: SERPAPI_API_KEY not set (checked environment and .env); "
+              "falling back to mock data", file=sys.stderr)
+        return None
+    if requests is None:
+        print("WARN: 'requests' not installed; falling back to mock data",
+              file=sys.stderr)
         return None
     try:
         resp = requests.get(
@@ -94,6 +118,7 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=3, help="Max results (default: 3)")
     args = parser.parse_args()
 
+    load_env()
     results = search_serpapi(args.query, args.limit)
     if results is None or len(results) == 0:
         results = search_mock(args.query, args.limit)

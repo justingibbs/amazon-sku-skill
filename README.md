@@ -18,19 +18,23 @@ Given an Ally SKU, the skill:
 
 ## Setup
 
-Requirements: Python 3.10+, [Claude Code](https://claude.com/claude-code) installed.
+Requirements:
+
+- [uv](https://docs.astral.sh/uv/) (`brew install uv` on macOS, or see the [install docs](https://docs.astral.sh/uv/getting-started/installation/))
+- [Claude Code](https://claude.com/claude-code)
 
 ```bash
 git clone https://github.com/justingibbs/amazon-sku-skill.git
 cd amazon-sku-skill
-pip install -r requirements.txt
 
 # Optional: live Amazon data via SerpApi (100 free searches/month)
 cp .env.example .env
 # then edit .env and add your SERPAPI_API_KEY
 ```
 
-To invoke: start Claude Code in this directory and ask it to audit one of the SKUs (e.g., *"Audit Ally SKU `ALY-AURA-PRO-001` against competitors"*). The skill auto-loads from `.claude/skills/`.
+That's it — there is no manual `pip install` step. `uv run` handles Python + dependencies automatically on first invocation (resolves from `pyproject.toml` and `uv.lock`, caches the venv in `.venv/`).
+
+To invoke: start Claude Code in this directory and ask it to audit one of the SKUs (e.g., *"Audit Ally SKU `ALY-AURA-PRO-001` against competitors"*). The skill auto-loads from `.claude/skills/` and runs the Python helpers via `uv run`.
 
 ## Architecture
 

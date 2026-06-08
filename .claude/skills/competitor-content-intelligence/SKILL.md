@@ -16,13 +16,13 @@ Follow this flow in order. Pause for the user where noted — do not race ahead.
 If the user already named a SKU, skip to loading it. Otherwise:
 
 ```
-python .claude/skills/competitor-content-intelligence/scripts/get_sku.py --list
+uv run .claude/skills/competitor-content-intelligence/scripts/get_sku.py --list
 ```
 
 Show the user the list and ask which SKU to audit. Once they pick:
 
 ```
-python .claude/skills/competitor-content-intelligence/scripts/get_sku.py --sku-id <ID>
+uv run .claude/skills/competitor-content-intelligence/scripts/get_sku.py --sku-id <ID>
 ```
 
 ### Step 2 — Clarify intent
@@ -46,13 +46,13 @@ Do not proceed until the user picks one. Use the answer to bias later recommenda
 Construct a search query from the SKU. Use the **product category + key attributes**, NOT Ally's brand name. Example: for the Aura Pro, query `"wireless noise cancelling over-ear headphones"`, not `"Ally Aura Pro"`.
 
 ```
-python .claude/skills/competitor-content-intelligence/scripts/find_competitors.py --query "<query>" --limit 3
+uv run .claude/skills/competitor-content-intelligence/scripts/find_competitors.py --query "<query>" --limit 3
 ```
 
 For each returned ASIN, fetch full details:
 
 ```
-python .claude/skills/competitor-content-intelligence/scripts/fetch_listing.py --asin <ASIN>
+uv run .claude/skills/competitor-content-intelligence/scripts/fetch_listing.py --asin <ASIN>
 ```
 
 Each script's output includes a `source` field (`serpapi` or `mock`). If `mock`, flag this in the final summary so the user knows the comparison is illustrative.
