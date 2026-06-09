@@ -16,7 +16,7 @@ Legend: `[Claude]` = LLM reasoning, `[Python: <script>]` = deterministic script,
 ```
                               USER
                                 │
-                                │  "Audit ALY-DASH-SPORT-004"
+                                │  "Audit B0DGHN493N"
                                 │  (any prompt with "audit" / "improve listing"
                                 │   / "compare to competitors" matches the
                                 │   skill's frontmatter description)
@@ -30,8 +30,9 @@ Legend: `[Claude]` = LLM reasoning, `[Python: <script>]` = deterministic script,
                                 ▼
    ┌──────────────────────────────────────────────────────────┐
    │ Step 1 — Identify SKU             [Python: get_sku.py]   │
-   │   reads:  data/ally_skus.csv                             │
-   │   emits:  title, bullets, description, brand, category   │
+   │   reads:  data/bpn_skus.csv                              │
+   │   emits:  title, bullets, description, brand,            │
+   │           category_node, universe, ranks{}               │
    └──────────────────────────────────────────────────────────┘
                                 │
                                 ▼
@@ -53,28 +54,33 @@ Legend: `[Claude]` = LLM reasoning, `[Python: <script>]` = deterministic script,
    │   (b) fetch_listing.py --asin <ASIN>   × 3 (parallel)    │
    │       calls: SerpApi amazon_product engine               │
    │              → cache → mock (see Diagram 2)              │
-   │       emits: full title/bullets/description + source     │
+   │       emits: title/bullets/description/images/           │
+   │              categories/price/rating/reviews/            │
+   │              bestsellers_rank + source                   │
    │              + description_format flag                   │
    └──────────────────────────────────────────────────────────┘
                                 │
                                 ▼
    ┌──────────────────────────────────────────────────────────┐
    │ Step 4 — Compare                            [Claude]     │
-   │   builds attribute table: Ally vs Comp 1 / 2 / 3         │
+   │   builds attribute table: BPN vs Comp 1 / 2 / 3          │
    │   adjusts the description row for competitors whose      │
    │     description_format is "a_plus_content"               │
    │     (renders "A+ Content (text not extractable)" instead │
    │      of misleadingly counting 0 chars)                   │
+   │   labels rank rows: CIQ-historical vs SerpApi-snapshot   │
+   │     (never silently mixes them)                          │
    └──────────────────────────────────────────────────────────┘
                                 │
                                 ▼
    ┌──────────────────────────────────────────────────────────┐
    │ Step 5 — Recommend top 3 edits              [Claude]     │
-   │   reads:  data/amazon_content_guidelines.md              │
+   │   reads (primary): data/amazon_styleguide_extracted.md   │
+   │   reads (secondary): data/amazon_content_guidelines.md   │
    │   each edit ties to:                                     │
    │     · user intent (from Step 2)                          │
    │     · a specific competitor with their ASIN              │
-   │     · a specific Amazon rule with its source URL         │
+   │     · a specific Amazon rule with its page or URL        │
    └──────────────────────────────────────────────────────────┘
                                 │
                                 ▼
@@ -88,14 +94,14 @@ Legend: `[Claude]` = LLM reasoning, `[Python: <script>]` = deterministic script,
                                 ▼
    ┌──────────────────────────────────────────────────────────┐
    │ Step 7 — Write summary                      [Claude]     │
-   │   writes: output/<SKU>_recommendation_<YYYYMMDD>.md      │
+   │   writes: output/<ASIN>_recommendation_<YYYYMMDD>.md     │
    │   sections:                                              │
-   │     · header (SKU, brand, audit date, user intent)       │
+   │     · header (ASIN, brand, breadcrumb, intent)           │
    │     · current content                                    │
    │     · approved edits (before/after/why/competitor/rule)  │
    │     · paste-ready fields (drop into Seller Central)      │
-   │     · sources (all rule URLs)                            │
-   │     · data provenance (per-ASIN source)                  │
+   │     · sources (styleguide pages + URLs)                  │
+   │     · data provenance (per-ASIN source + rank labels)    │
    └──────────────────────────────────────────────────────────┘
                                 │
                                 ▼
@@ -182,32 +188,47 @@ amazon-sku-skill/
 │   ├── SKILL.md ──────────────────────► [read by] Claude (the prompt)
 │   │
 │   ├── scripts/
-│   │   ├── get_sku.py ────────────────► reads:  data/ally_skus.csv
+│   │   ├── get_sku.py ────────────────► reads:  data/bpn_skus.csv
 │   │   │
 │   │   ├── find_competitors.py ───────► calls:  SerpApi search engine
 │   │   │                                 falls back to:
 │   │   │                                   data/mock_competitors.json
 │   │   │
-│   │   └── fetch_listing.py ──────────► calls:  SerpApi product engine
-│   │                                     writes/reads:
-│   │                                       data/.cache/listings/
-│   │                                     falls back to:
-│   │                                       data/mock_competitors.json
+│   │   ├── fetch_listing.py ──────────► calls:  SerpApi product engine
+│   │   │                                  writes/reads:
+│   │   │                                    data/.cache/listings/
+│   │   │                                  falls back to:
+│   │   │                                    data/mock_competitors.json
+│   │   │
+│   │   └── extract_styleguide.py ─────► one-shot: reads PDF in data/,
+│   │                                     writes data/amazon_styleguide_
+│   │                                     extracted.md
 │   │
 │   └── data/
 │       ├── mock_competitors.json ─────► fallback competitor catalog
+│       │                                 (sports-nutrition ASINs)
 │       └── .cache/listings/ ──────────► per-ASIN JSON cache
 │                                          7-day TTL, gitignored
 │
 ├── data/
-│   ├── ally_skus.csv ─────────────────► Ally catalog (read-only)
-│   │                                     consumed in Step 1
+│   ├── bpn_skus.csv ─────────────────► BPN catalog (read-only)
+│   │                                    consumed in Step 1
 │   │
-│   └── amazon_content_guidelines.md ──► [read by] Claude in Step 5
-│                                          to cite rule URLs
+│   ├── asin_data_filled.csv ─────────► upstream CIQ export
+│   │                                    (read-only reference)
+│   │
+│   ├── PetSupplies_PetFood_           ► source PDF from CIQ
+│   │   Styleguide_EN_AE.pdf             consumed by extract_styleguide.py
+│   │
+│   ├── amazon_styleguide_              ► [read by] Claude in Step 5
+│   │   extracted.md                      PRIMARY citation source
+│   │
+│   └── amazon_content_guidelines.md ─► [read by] Claude in Step 5
+│                                          SECONDARY citation source
+│                                          (URL-cite-able rules)
 │
 ├── output/                             ► generated recommendations
-│   └── <SKU>_recommendation_           (gitignored)
+│   └── <ASIN>_recommendation_           (gitignored)
 │       <YYYYMMDD>.md
 │
 ├── .env ──────────────────────────────► SERPAPI_API_KEY (gitignored)
@@ -217,9 +238,9 @@ amazon-sku-skill/
 └── README.md
 ```
 
-**Read-only inputs:** `data/ally_skus.csv`, `data/amazon_content_guidelines.md`, `data/mock_competitors.json` (inside the skill dir).
+**Read-only inputs:** `data/bpn_skus.csv`, `data/asin_data_filled.csv`, `data/PetSupplies_PetFood_Styleguide_EN_AE.pdf`, `data/amazon_styleguide_extracted.md`, `data/amazon_content_guidelines.md`, `data/mock_competitors.json` (inside the skill dir).
 
-**Generated artifacts:** `output/*.md` (recommendation summaries), `data/.cache/listings/*.json` (SerpApi cache). Both gitignored.
+**Generated artifacts:** `output/*.md` (recommendation summaries), `data/.cache/listings/*.json` (SerpApi cache), `data/amazon_styleguide_extracted.md` (PDF extraction output — committed, but regenerable). The first two are gitignored.
 
 **Secrets:** `.env` holds `SERPAPI_API_KEY` and is gitignored; `.env.example` documents the variable without the value.
 
@@ -246,7 +267,7 @@ Claude does not proceed to Step 3 until the user picks one. The answer biases St
 | Answer | What gets prioritized in recommendations |
 |---|---|
 | #1 Search ranking | Keyword density in titles, attribute coverage, search-relevant terms in bullets |
-| #2 Conversion | Benefit-first bullet structure, descriptive depth, scannability, social-proof-adjacent specs (battery hours, warranty, included items) |
+| #2 Conversion | Benefit-first bullet structure, descriptive depth, scannability, social-proof-adjacent specs (servings, electrolyte profile, certifications, accessories) |
 | #3 Compliance | Rule violations (banned terms, ALL CAPS, special characters, prohibited claims) |
 | #4 All | Balance across all three |
 
@@ -264,4 +285,4 @@ Reply semantics:
 - `revise <N>` — Claude iterates on edit N only and re-asks
 - `regenerate all` — Claude discards all three edits and produces a new set
 
-Claude does not write `output/<SKU>_recommendation_<YYYYMMDD>.md` until the user explicitly approves.
+Claude does not write `output/<ASIN>_recommendation_<YYYYMMDD>.md` until the user explicitly approves.
