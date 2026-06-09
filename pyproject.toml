@@ -1,9 +1,10 @@
 [project]
 name = "amazon-sku-skill"
 version = "0.1.0"
-description = "Claude Code skill for auditing Ally Audio Amazon listings against competitor SKUs (CommerceIQ take-home)"
+description = "Claude Code skill for auditing BARE PERFORMANCE NUTRITION Amazon listings against competitor SKUs (CommerceIQ take-home)"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "requests>=2.31.0",
+    "pypdf>=4.0.0",
 ]

@@ -181,8 +181,90 @@ def fetch_serpapi(asin: str) -> dict | None:
         "rating": pd.get("rating"),
         "reviews": pd.get("reviews"),
         "url": pd.get("link"),
+        "categories": _extract_categories(pd),
+        "images": _extract_images(pd),
+        "price": _extract_price(pd),
+        "bestsellers_rank": _extract_bestsellers_rank(pd),
         "source": "serpapi",
     }
+
+
+def _extract_categories(pd: dict) -> list[str]:
+    """Return the Amazon breadcrumb as a flat list of category names.
+
+    SerpApi exposes the breadcrumb as `categories` (a list of {name, link}
+    dicts). Falls back to an empty list if absent or malformed.
+    """
+    raw = pd.get("categories") or []
+    if not isinstance(raw, list):
+        return []
+    names = []
+    for c in raw:
+        if isinstance(c, dict) and c.get("name"):
+            names.append(c["name"])
+        elif isinstance(c, str) and c:
+            names.append(c)
+    return names
+
+
+def _extract_images(pd: dict) -> list[str]:
+    """Return the listing's image URLs.
+
+    SerpApi shapes vary: sometimes `images` is a list of URL strings, sometimes
+    a list of dicts (`{link: "..."}` or `{image: "..."}`). Defensive.
+    """
+    raw = pd.get("images") or []
+    if not isinstance(raw, list):
+        return []
+    urls = []
+    for item in raw:
+        if isinstance(item, str) and item:
+            urls.append(item)
+        elif isinstance(item, dict):
+            url = item.get("link") or item.get("image") or item.get("url")
+            if url:
+                urls.append(url)
+    return urls
+
+
+def _extract_price(pd: dict) -> str | None:
+    """Return a display-ready price string (e.g., '$24.99') or None.
+
+    SerpApi sometimes returns `price` as a dict ({raw, value, currency}),
+    sometimes as a plain string, sometimes via `prices[0].raw`.
+    """
+    price = pd.get("price")
+    if isinstance(price, dict):
+        return price.get("raw") or price.get("value")
+    if isinstance(price, str) and price:
+        return price
+    prices = pd.get("prices")
+    if isinstance(prices, list) and prices:
+        first = prices[0]
+        if isinstance(first, dict):
+            return first.get("raw") or first.get("value")
+    return None
+
+
+def _extract_bestsellers_rank(pd: dict) -> list[dict]:
+    """Return Amazon's Best Sellers Rank entries when present.
+
+    SerpApi exposes this as `bestsellers_rank` — a list of
+    {rank, category, link} dicts. Snapshot only (not min/avg over time).
+    """
+    raw = pd.get("bestsellers_rank") or []
+    if not isinstance(raw, list):
+        return []
+    entries = []
+    for r in raw:
+        if not isinstance(r, dict):
+            continue
+        rank = r.get("rank")
+        category = r.get("category") or r.get("name")
+        if rank is None and not category:
+            continue
+        entries.append({"rank": rank, "category": category})
+    return entries
 
 
 def fetch_mock(asin: str) -> dict | None:

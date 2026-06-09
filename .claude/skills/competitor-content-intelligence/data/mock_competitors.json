@@ -1,214 +1,316 @@
 {
-  "Over-Ear Headphones": [
+  "Sugar Free Electrolyte Hydration Powder": [
     {
-      "asin": "B09XS7JWHH",
-      "title": "Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones with Auto Noise Canceling Optimizer, Crystal Clear Hands-Free Calling, and Alexa Voice Control, Black",
+      "asin": "B0D6N5FZ29",
+      "title": "Liquid I.V. Sugarfree Hydration Multiplier Lemon Lime & White Peach - 26 Sticks",
       "bullets": [
-        "INDUSTRY LEADING NOISE CANCELLATION-Two processors control 8 microphones for unprecedented noise cancellation. With Auto NC Optimizer, noise canceling is automatically optimized based on your wearing conditions and environment",
-        "MAGNIFICENT SOUND, ENGINEERED TO PERFECTION-Newly developed Integrated Processor V1 unleashes the potential of new 30mm driver units to deliver high-quality sound with reduced distortion",
-        "CRYSTAL CLEAR HANDS-FREE CALLING with 4 beamforming microphones, precise voice pickup, and advanced audio signal processing",
-        "Up to 30-Hour battery life with quick charging (3 min charge for 3 hours of playback)",
-        "ULTRA-COMFORTABLE LIGHTWEIGHT DESIGN with soft fit leather and pressure-relieving design for hours of comfortable wear"
+        "No Artificial Sweeteners",
+        "Proprietary Amino Acid Allulose Blend",
+        "3x the Electrolytes of the Leading Sports Drink",
+        "Scientifically & Clinically Tested 0 Sugar Hydration Solution"
       ],
-      "description": "The WH-1000XM5 headphones rewrite the rules for distraction-free listening, with two processors controlling eight microphones for unprecedented noise canceling performance. With Auto NC Optimizer, noise canceling is automatically optimized based on your wearing conditions and environment.",
-      "brand": "Sony",
-      "rating": 4.5,
-      "reviews": 12453,
-      "price": "$348.00",
-      "url": "https://www.amazon.com/dp/B09XS7JWHH"
-    },
-    {
-      "asin": "B0CCZ1L489",
-      "title": "Bose QuietComfort Ultra Wireless Noise Cancelling Headphones with Spatial Audio, Over-the-Ear Headphones with Mic, Up to 24 Hours of Battery Life, Black",
-      "bullets": [
-        "BREAKTHROUGH SPATIAL AUDIO: Bose Immersive Audio uses new spatializing technologies to create an unmatched depth and dimension to all your favorite content",
-        "WORLD-CLASS NOISE CANCELLATION: Bose's CustomTune sound calibration system tailors noise cancellation and audio performance to the unique shape of your ears",
-        "PREMIUM COMFORT MEETS PREMIUM SOUND: Plush cushions and a lightweight design made from luxe materials offer hours of all-day listening comfort",
-        "CONTROL HOW YOU LISTEN: Choose between three listening modes - Quiet, Aware with ActiveSense, and Immersion",
-        "ALL-DAY BATTERY LIFE: Enjoy up to 24 hours of battery life using any listening mode - plus 4 hours of battery life on a quick 15 minute charge"
-      ],
-      "description": "Bose QuietComfort Ultra Headphones rewrite the rulebook with breakthrough Bose Immersive Audio, world-class noise cancellation, and premium comfort engineered for all-day wear.",
-      "brand": "Bose",
-      "rating": 4.4,
-      "reviews": 8214,
-      "price": "$429.00",
-      "url": "https://www.amazon.com/dp/B0CCZ1L489"
-    },
-    {
-      "asin": "B0BTYCRJSS",
-      "title": "Sennheiser Momentum 4 Wireless Headphones - Bluetooth Headset for Crystal-Clear Calls with Adaptive Noise Cancellation, 60h Battery Life, Lightweight Folding Design, Black",
-      "bullets": [
-        "EXCEPTIONAL SOUND PERFORMANCE - 42 mm transducer system tuned for clear, balanced sound with deep dynamic bass, smooth natural mids, and detailed treble",
-        "ADAPTIVE NOISE CANCELLATION - Senses your surroundings and adjusts dynamically to keep distractions out",
-        "60-HOUR BATTERY LIFE - All-day listening with one of the longest battery lives on the market; USB-C fast charging",
-        "CRYSTAL-CLEAR CALLS - Advanced 4-microphone beamforming technology with adaptive noise suppression for clear voice pickup",
-        "PERSONALIZED LISTENING - Sound Personalization, equalizer, and Sound Modes via the Sennheiser Smart Control App"
-      ],
-      "description": "Momentum 4 Wireless brings together a refined design with class-leading audio for an immersive listening experience that lasts. 60 hours of battery and adaptive noise cancellation keep you in the moment.",
-      "brand": "Sennheiser",
-      "rating": 4.3,
-      "reviews": 4187,
-      "price": "$299.95",
-      "url": "https://www.amazon.com/dp/B0BTYCRJSS"
-    }
-  ],
-  "True Wireless Earbuds": [
-    {
-      "asin": "B0D1XD1ZV3",
-      "title": "Apple AirPods Pro 2 Wireless Earbuds, Active Noise Cancellation, Hi-Fi Sound, Transparency Mode, Spatial Audio, MagSafe Charging Case (USB-C), Bluetooth Headphones for iPhone",
-      "bullets": [
-        "RICHER AUDIO EXPERIENCE - The Apple-designed H2 chip pushes advanced audio performance even further",
-        "NEXT-LEVEL ACTIVE NOISE CANCELLATION - Up to 2x more Active Noise Cancellation than the previous generation",
-        "ADAPTIVE TRANSPARENCY - Lets outside sounds in while reducing the intensity of loud environmental noise",
-        "PERSONALIZED SPATIAL AUDIO with dynamic head tracking places sound all around you for an immersive listening experience",
-        "UP TO 6 HOURS of listening time with one charge with Active Noise Cancellation enabled; 30 hours total with MagSafe Charging Case"
-      ],
-      "description": "AirPods Pro feature up to 2x more Active Noise Cancellation than the previous generation, Adaptive Transparency to let outside sounds in, and Personalized Spatial Audio with dynamic head tracking.",
-      "brand": "Apple",
-      "rating": 4.7,
-      "reviews": 47892,
-      "price": "$199.00",
-      "url": "https://www.amazon.com/dp/B0D1XD1ZV3"
-    },
-    {
-      "asin": "B0C33XXS56",
-      "title": "Sony WF-1000XM5 The Best Truly Wireless Bluetooth Noise Canceling Earbuds Headphones with Alexa Built-in, Black",
-      "bullets": [
-        "INDUSTRY LEADING NOISE CANCELLATION with two processors controlling six microphones for unprecedented noise canceling",
-        "MAGNIFICENT SOUND with the newly developed Dynamic Driver X for high-quality sound with reduced distortion",
-        "CRYSTAL CLEAR HANDS-FREE CALLING with bone conduction sensor and AI-based noise reduction algorithm",
-        "Up to 24-HOUR battery life with carrying case and quick charging (3 min charge for 1 hour of playback)",
-        "PREMIUM COMFORT WITH SECURE FIT with newly developed noise isolation earbud tips in multiple sizes (SS/S/M/L)"
-      ],
-      "description": "Listen without limits with the WF-1000XM5. Industry-leading noise cancellation, magnificent sound, crystal clear hands-free calling, and a secure, comfortable fit.",
-      "brand": "Sony",
-      "rating": 4.4,
-      "reviews": 6321,
-      "price": "$249.99",
-      "url": "https://www.amazon.com/dp/B0C33XXS56"
-    },
-    {
-      "asin": "B0BDHB4GLC",
-      "title": "Bose QuietComfort Earbuds II, Wireless, Bluetooth, World's Best Noise Cancelling In-Ear Headphones with Personalized Noise Cancellation & Sound, Triple Black",
-      "bullets": [
-        "PERSONALIZED NOISE CANCELLATION & SOUND: A breakthrough technology automatically personalizes the performance to the unique shape of your ears",
-        "WORLD'S BEST NOISE CANCELLATION: Hush the world around you to focus on what matters most - your music, podcasts, or moments of quiet",
-        "ULTIMATE COMFORT: Combines the most stable and comfortable in-ear fit ever, with all-day comfort for hours of listening",
-        "SECURE FIT: Newly designed stability bands and ear tips, both in three sizes, ensure a perfect fit for every ear",
-        "ALL-DAY BATTERY: Up to 6 hours of listening on a single charge with the case providing an additional 18 hours"
-      ],
-      "description": "The Bose QuietComfort Earbuds II have been engineered to be the world's best noise cancelling earbuds, with breakthrough technology that personalizes the sound and noise cancellation to your unique ear shape.",
-      "brand": "Bose",
-      "rating": 4.3,
-      "reviews": 18472,
-      "price": "$279.00",
-      "url": "https://www.amazon.com/dp/B0BDHB4GLC"
-    }
-  ],
-  "On-Ear Headphones": [
-    {
-      "asin": "B0CZPLVT4S",
-      "title": "Beats Solo 4 - Wireless Bluetooth On-Ear Headphones, Apple & Android Compatible, Up to 50 Hours of Battery Life - Matte Black",
-      "bullets": [
-        "Custom acoustic architecture for rich, immersive sound with class-leading detail",
-        "50-hour battery life with Fast Fuel charging (10-min charge for 5 hours of playback)",
-        "Personalized Spatial Audio with dynamic head tracking for Apple devices",
-        "Lossless Audio via USB-C wired connection for studio-quality listening",
-        "Built-in microphone for crystal-clear calls and voice assistants"
-      ],
-      "description": "Beats Solo 4 are wireless on-ear headphones rebuilt from the ground up with custom acoustic architecture, 50 hours of battery life, and Personalized Spatial Audio.",
-      "brand": "Beats",
-      "rating": 4.4,
-      "reviews": 5641,
-      "price": "$199.99",
-      "url": "https://www.amazon.com/dp/B0CZPLVT4S"
-    },
-    {
-      "asin": "B0BS7P31LD",
-      "title": "JBL Tune 770NC - Adaptive Noise Cancelling Wireless Over-Ear Headphones, Up to 70H Battery Life with Speed Charge, Lightweight, Comfortable and Foldable Design (Black)",
-      "bullets": [
-        "ADAPTIVE NOISE CANCELLING with Smart Ambient automatically adjusts to your environment",
-        "70 hours of battery life with Speed Charge - 5 minutes of charging delivers 3 hours of playtime",
-        "JBL Pure Bass Sound delivers powerful, deep bass at any volume",
-        "Bluetooth 5.3 Multi-Point Connection to switch between two devices seamlessly",
-        "Lightweight, foldable design with cushioned ear cups for all-day comfort"
-      ],
-      "description": "The JBL Tune 770NC delivers JBL Pure Bass Sound with Adaptive Noise Cancelling and 70 hours of battery life in a lightweight foldable design.",
-      "brand": "JBL",
-      "rating": 4.5,
-      "reviews": 14782,
-      "price": "$99.95",
-      "url": "https://www.amazon.com/dp/B0BS7P31LD"
-    },
-    {
-      "asin": "B07YVYZ8T5",
-      "title": "Skullcandy Hesh Evo Wireless Over-Ear Headphone - True Black",
-      "bullets": [
-        "36 hours of battery life with rapid charge (10-min charge for 3 hours of use)",
-        "Built-in Tile finder technology - locate your headphones with the Tile app",
-        "Bluetooth 5.0 wireless connection with up to 30 ft range",
-        "Custom-tuned 40mm drivers deliver Skullcandy's Supreme Sound signature",
-        "Activate your phone's voice assistant with a tap"
-      ],
-      "description": "Hesh Evo wireless over-ear headphones bring 36 hours of battery life, Tile-enabled find-my-headphones technology, and Skullcandy's signature Supreme Sound.",
-      "brand": "Skullcandy",
-      "rating": 4.4,
-      "reviews": 9824,
-      "price": "$79.99",
-      "url": "https://www.amazon.com/dp/B07YVYZ8T5"
-    }
-  ],
-  "Kids Headphones": [
-    {
-      "asin": "B07TWFVD8B",
-      "title": "JLab JBuddies Studio Kids Wired Headphones, Toddler Headphones, Kid Safe Volume Limiter, Folding Adjustable Headphones, Noise Isolation with Mic and Limited 85dB Volume Output (Blue)",
-      "bullets": [
-        "KID SAFE 85dB VOLUME LIMITER protects developing ears while still providing clear, loud audio",
-        "PERFECT FIT for ages 2-12 with fully adjustable headband and rotating ear cups that fold for portable use",
-        "DURABLE METAL & PLASTIC construction stands up to drops, tugs, and everyday wear",
-        "TANGLE FREE FABRIC CORD with built-in microphone for clear hands-free calls and video chats",
-        "SHARE THE MUSIC with included Music Share port - plug a second pair in for two listeners"
-      ],
-      "description": "JBuddies Studio are designed specifically for kids ages 2-12 with safety, comfort, and durability in mind. Volume-limited to 85dB, foldable, and built to survive everyday kid wear.",
-      "brand": "JLab",
-      "rating": 4.5,
-      "reviews": 11543,
-      "price": "$19.99",
-      "url": "https://www.amazon.com/dp/B07TWFVD8B"
-    },
-    {
-      "asin": "B07XNTWVD5",
-      "title": "BuddyPhones Cosmos Plus, Active Noise Cancelling Bluetooth Kids Wireless Headphones, Best for Online Studying & Travel, with Safe Volume Limit of 75, 85, 94dB and Travel Bag",
-      "bullets": [
-        "ACTIVE NOISE CANCELLING blocks up to 22dB of ambient noise for distraction-free study and travel",
-        "3 SAFE VOLUME LIMITERS - 75dB for travel, 85dB for everyday, 94dB for noisy environments",
-        "24-HOUR PLAYTIME with USB-C charging - perfect for long flights and road trips",
-        "ADJUSTABLE & FOLDABLE design fits ages 5-15; soft padding for all-day comfort",
-        "INCLUDES TRAVEL BAG, audio cable, charging cable, and StudyBuddy mic for online learning"
-      ],
-      "description": "BuddyPhones Cosmos Plus are the world's first active noise cancelling headphones designed specifically for children, with three safe volume limits and 24 hours of battery life.",
-      "brand": "BuddyPhones",
+      "description": "Sports Nutrition Electrolyte Replacement Drinks",
+      "description_format": "text",
+      "brand": "Liquid I.V.",
       "rating": 4.6,
-      "reviews": 3214,
-      "price": "$129.99",
-      "url": "https://www.amazon.com/dp/B07XNTWVD5"
+      "reviews": 18432,
+      "price": "$24.99",
+      "url": "https://www.amazon.com/dp/B0D6N5FZ29",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/aff6e8804c738df1c3523d3690039481.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/27cde96a6fba6c4d3aa7d1704f38141b.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/6873ed2a20dbdbbcbc20d94a6efffa6e.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/5e715402ac932711d3be319380803e33.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/661b4b51beb7be0bcbe58c9e41b2e2f7.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/c37aabffbb7897d1d720a69af55ecebb.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/66eac46d39547f39f5d7e69cf990b89c.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/af1db4c5d5973b480938623aede44a08.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/50a9007eedb4059731e184f874e830d4.res"
+      ],
+      "bestsellers_rank": []
     },
     {
-      "asin": "B07KS8RHJ5",
-      "title": "LilGadgets Connect Plus Pro Kids Premium Wired Headphones with Microphone, SharePort, and Volume Limiting (Black)",
+      "asin": "B0D5WRQZFX",
+      "title": "Hi-Lyte K1000 Electrolytes Sticks Unflavored Keto & Performance, 30 Servings",
       "bullets": [
-        "Volume limited to 93dB to protect children's hearing during use",
-        "SharePort allows multiple kids to listen to the same audio source",
-        "In-line microphone for hands-free calling and online learning",
-        "Soft, plush ear cushions covered in premium materials for all-day comfort",
-        "Designed for ages 4 and up with adjustable headband and tangle-free cord"
+        "KETO ELECTROLYTE SUPPLEMENT – Keto K1000 electrolyte powder is a high potassium supplement designed to help with hydration, increase cellular energy, and beat the Keto flu. With 1,000mg of potassium, this trace mineral blend is tailor-made for keto and intermittent fasting enthusiasts. Simply mix one scoop into 16 oz of water. Avoid exceeding one serving every four hours or three servings a day. If you're new to the product, start with half a serving to ensure tolerance. Use as directed.",
+        "NO ADDITIVES - Our non-GMO, vegan, and gluten-free electrolyte powder formula is a favorite among athletes and fitness enthusiasts. It contains absolutely NO added sugar, soy, calories or maltodextrin. Crafted from natural sea salt and trace minerals, it helps to facilitate rapid rehydration and enhances your morning recovery.",
+        "PEAK HYDRATION & CELLULAR ENERGY - Electrolytes play a crucial role in supporting cellular energy, muscle function, and nerve health. Our potassium-rich electrolyte powder may help rejuvenate cellular energy, ensuring you stay active and energetic. This soluble, performance electrolyte serving delivers 1,000mg of potassium, helping you reach the recommended daily intake of 4,700mg of potassium citrate.",
+        "ULTIMATE HYDRATION – Keto K1000 hydration packets strikes the perfect balance of electrolytes and potassium, ideal for promoting hydration, muscle recovery, and sustained energy levels. Whether you're into fitness, intermittent fasting, or low carb living, this USA-blended supplement has you covered.",
+        "30 SERVINGS – This supplement provides 30 servings of electrolyte and trace mineral support powder. In addition to potassium, it also contains essential minerals such as Zinc, Calcium, Manganese, Sodium, and more. This is a unflavored electrolyte drink- N0 SUGAR! To enjoy the enhanced electrolytes simply add water and enjoy. Adapted Nutrition is committed to helping you transform your diet and fitness habits for a healthier life. Packaging my vary."
       ],
-      "description": "LilGadgets Connect Plus Pro Kids Wired Headphones combine kid-safe volume limiting, all-day comfort, and a SharePort for shared listening - ideal for online learning and family travel.",
-      "brand": "LilGadgets",
-      "rating": 4.4,
-      "reviews": 8721,
-      "price": "$34.99",
-      "url": "https://www.amazon.com/dp/B07KS8RHJ5"
+      "description": "Hi-Lyte K1000 Electrolytes Sticks Unflavored Keto Performance 30 Servings is designed for everyday use in the Health & Household segment. Suitable for home or on-the-go use; review the product images and information for full specifications and usage guidance. KETO ELECTROLYTE SUPPLEMENT – Keto K1000 electrolyte powder is a high potassium supplement designed to help with hydration, increase cellular energy, and beat the Keto flu. With 1,000mg of potassium, this trace...",
+      "description_format": "text",
+      "brand": "Hi-Lyte",
+      "rating": 4.6,
+      "reviews": 5294,
+      "price": "$32.95",
+      "url": "https://www.amazon.com/dp/B0D5WRQZFX",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/09/616f8e5ebd5f6c0056d4f53b67a71bea.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/09/45c4e72f76d9aa457f2a47b03ec5469b.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/09/2fbf0ad6c1564ed55d740081edc65a24.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/09/900e574ced787e85427a5b0f2ac6ba51.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/09/b4be0cef05b6ed61fd805032c1c4623a.res"
+      ],
+      "bestsellers_rank": []
+    },
+    {
+      "asin": "B0D8WP5BFG",
+      "title": "Gatorade Hydration Booster Electrolyte Drink Mix Powder Packets, Strawberry Watermelon, Advanced Electrolyte Blend, No Added Colors, No Artificial Sweeteners, Essential Vitamins A, C, B3, B5, B6, Makes 20 Fl Oz (6 Pack)",
+      "bullets": [
+        "Includes 6 (0.35 oz) Gatorade Hydration Booster Electrolyte Drink Mix Sachets, Strawberry Watermelon flavor",
+        "Developed with an advanced blend of electrolytes from watermelon, sea salt, & other sodium and potassium salts for All Day Hydration",
+        "Contains Essential Vitamins A, C, B3, B5, B6",
+        "Made with no artificial sweeteners, flavors or added colors",
+        "Gatorade Superior Science",
+        "Add contents of one packet to 20-fl. Oz. Of water. Shake it up and enjoy!",
+        "Available in Strawberry Watermelon, Citrus Berry and Tropical Mango",
+        "Packaging May Vary"
+      ],
+      "description": "Gatorade Hydration Booster, Strawberry Watermelon, Makes 16.9 Fl Oz (Pack of 6)",
+      "description_format": "text",
+      "brand": "Gatorade",
+      "rating": 4.5,
+      "reviews": 9421,
+      "price": "$11.94",
+      "url": "https://www.amazon.com/dp/B0D8WP5BFG",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/7c578f54b8b0a0389478bb7f0474e9a9.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/d8e1000a85b35e019257559ab0c12889.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/257ea8fa3d744116fda4af73fa884f6c.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/380cdf13f8618d852f7e422f30cc00fd.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/f2ac9766bd0d33ed5c31f2c3138e0717.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/5fc1bb9512b3ae1421d042d4e8c2a3e0.res"
+      ],
+      "bestsellers_rank": []
+    }
+  ],
+  "Electrolyte Drink Mix Hydration": [
+    {
+      "asin": "B0BGR6842K",
+      "title": "Gatorlyte Powder Watermelon, 16.9oz (Pack of 6)",
+      "bullets": [
+        "Includes 6 sticks of Gatorlyte Rapid Rehydration powder, each stick makes 16.9 oz (500ml) of Gatorlyte, Watermelon flavor",
+        "Same great product as Gatorlyte Ready to Drink, but in convenient powder form.",
+        "Scientifically formulated for rapid rehydration to help quickly replace the fluids and electrolytes lost in sweat",
+        "Specialized blend of 5 electrolytes: Sodium, Potassium, Chloride, Magnesium, and Calcium",
+        "Made with no artificial sweeteners or flavors",
+        "Lower Sugar: Made with 60% lower sugar than leading sports drink, Gatorlyte contains 10g total sugars per 16.9 fl oz serving, the leading sports drink contains 32g sugars per 16.9 fl oz serving."
+      ],
+      "description": "Scientifically formulated for rapid rehydration to help quickly replace the fluids and electrolytes lost in sweat.",
+      "description_format": "text",
+      "brand": "Gatorlyte",
+      "rating": 4.7,
+      "reviews": 14872,
+      "price": "$15.99",
+      "url": "https://www.amazon.com/dp/B0BGR6842K",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/f2409b1ca6520e8e4b2edba9d71dc0de.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/b3ef317fff0fa5b70b271f3e912bbfc4.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/161e9bc3e719eda4af268039d0bb3a9c.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/17ad174a3f70ec02a660403196f28caa.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/020424dd25049491ba14c4063411f6c3.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/c30ce537e59f741d6e5dabbbd8fcc1fc.res"
+      ],
+      "bestsellers_rank": []
+    },
+    {
+      "asin": "B07BWM3FJL",
+      "title": "Nuun Immunity Electrolyte Tablets with Vitamin D, C, E, & A, Ginger, Elderberry, Magnesium & 4 Other Essential Electrolytes, Vegan, Orange Citrus, 8 Pack (80 Servings Total)",
+      "bullets": [
+        "HYDRATION WITH IMMUNE SUPPORT: Nuun Immunity is an immune support electrolyte tablet with 200mg of Vitamin C plus Vitamin A, D & E, along with minerals, electrolytes, and more",
+        "5 ESSENTIAL ELECTROLYTES: These Nuun electrolyte tablets include 5 essential electrolytes to help you hydrate and stay hydrated, plus nutrients to nourish your immune system; electrolytes included are Potassium, Sodium, Chloride, Magnesium, and Calcium",
+        "BOTANICALS, MINERALS & VITAMINS: Nuun Immunity tablets include zinc, selenium, turmeric, ginger, echinacea, and elderberry to support everyday health and wellness",
+        "VEGAN, NON-GMO, AND 2g OF SUGAR: Nuun Immunity is made with clean*, plant-based ingredients, is gluten free, vegan, kosher, and non-GMO; and each tablet contains 2g of sugar",
+        "REFRESHING FLAVOR: This 8 pack contains 8 tubes (10 tablets each) of Nuun Orange Citrus flavor for a total of 80 servings; the tubes are perfect to take on-the-go for whenever you want a refreshing electrolyte supplement"
+      ],
+      "description": "Nuun Immunity electrolyte tablets deliver powerful immune support through a scientifically formulated blend designed to support your immune system. Each tablet combines elderberry and zinc with turmeric, echinacea, ginger, and 200mg of Vitamin C, plus five essential electrolytes for comprehensive wellness. Electrolytes include Calcium (15 mg), Magnesium (15 mg), Chloride (40 mg), Sodium (100 mg), and Potassium (150 mg). These vegan-friendly tablets dissolve easily in 16 fl oz of water (hot or cold) to create a refreshing orange citrus flavored drink with 15 calories per serving. The convenient tablet form makes it easy to maintain your daily immune system routine ? simply drop one tablet in water, let it fizz for a few minutes, and enjoy. Nuun is the #1 electrolyte tablet brand, and proudly offers this clean* immune-supporting formula, that's both hydrating and delicious. *Clean is defined as non-GMO, vegan, and gluten free. **These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. ***Electrolyte levels based on the ratio of Sodium, Chloride, Potassium in our products. See Nuun's website for more details.",
+      "description_format": "text",
+      "brand": "Nuun",
+      "rating": 4.6,
+      "reviews": 21438,
+      "price": "$28.00",
+      "url": "https://www.amazon.com/dp/B07BWM3FJL",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/c20e91caaf71cd406f4eb5eec1399353.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/c67f36cfad10c73d5f387856af973b9a.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/cfd78be537f4d999e3843d0bf3606eab.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/4458018ddfaeda01d163637434c8f084.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/0fa532c943fae2b09772360701703c05.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/27c4b8d160f04506805cde01f9e6b631.res"
+      ],
+      "bestsellers_rank": []
+    },
+    {
+      "asin": "B0D6N5FZ29",
+      "title": "Liquid I.V. Sugarfree Hydration Multiplier Lemon Lime & White Peach - 26 Sticks",
+      "bullets": [
+        "No Artificial Sweeteners",
+        "Proprietary Amino Acid Allulose Blend",
+        "3x the Electrolytes of the Leading Sports Drink",
+        "Scientifically & Clinically Tested 0 Sugar Hydration Solution"
+      ],
+      "description": "Sports Nutrition Electrolyte Replacement Drinks",
+      "description_format": "text",
+      "brand": "Liquid I.V.",
+      "rating": 4.6,
+      "reviews": 18432,
+      "price": "$24.99",
+      "url": "https://www.amazon.com/dp/B0D6N5FZ29",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/aff6e8804c738df1c3523d3690039481.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/27cde96a6fba6c4d3aa7d1704f38141b.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/6873ed2a20dbdbbcbc20d94a6efffa6e.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/5e715402ac932711d3be319380803e33.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/661b4b51beb7be0bcbe58c9e41b2e2f7.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/c37aabffbb7897d1d720a69af55ecebb.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/66eac46d39547f39f5d7e69cf990b89c.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/af1db4c5d5973b480938623aede44a08.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/08/50a9007eedb4059731e184f874e830d4.res"
+      ],
+      "bestsellers_rank": []
+    }
+  ],
+  "Sports Nutrition Endurance Fuel": [
+    {
+      "asin": "B0D8WP5BFG",
+      "title": "Gatorade Hydration Booster Electrolyte Drink Mix Powder Packets, Strawberry Watermelon, Advanced Electrolyte Blend, No Added Colors, No Artificial Sweeteners, Essential Vitamins A, C, B3, B5, B6, Makes 20 Fl Oz (6 Pack)",
+      "bullets": [
+        "Includes 6 (0.35 oz) Gatorade Hydration Booster Electrolyte Drink Mix Sachets, Strawberry Watermelon flavor",
+        "Developed with an advanced blend of electrolytes from watermelon, sea salt, & other sodium and potassium salts for All Day Hydration",
+        "Contains Essential Vitamins A, C, B3, B5, B6",
+        "Made with no artificial sweeteners, flavors or added colors",
+        "Gatorade Superior Science",
+        "Add contents of one packet to 20-fl. Oz. Of water. Shake it up and enjoy!",
+        "Available in Strawberry Watermelon, Citrus Berry and Tropical Mango",
+        "Packaging May Vary"
+      ],
+      "description": "Gatorade Hydration Booster, Strawberry Watermelon, Makes 16.9 Fl Oz (Pack of 6)",
+      "description_format": "text",
+      "brand": "Gatorade",
+      "rating": 4.5,
+      "reviews": 9421,
+      "price": "$11.94",
+      "url": "https://www.amazon.com/dp/B0D8WP5BFG",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/7c578f54b8b0a0389478bb7f0474e9a9.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/d8e1000a85b35e019257559ab0c12889.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/257ea8fa3d744116fda4af73fa884f6c.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/380cdf13f8618d852f7e422f30cc00fd.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/f2ac9766bd0d33ed5c31f2c3138e0717.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/06/5fc1bb9512b3ae1421d042d4e8c2a3e0.res"
+      ],
+      "bestsellers_rank": []
+    },
+    {
+      "asin": "B0BGR6842K",
+      "title": "Gatorlyte Powder Watermelon, 16.9oz (Pack of 6)",
+      "bullets": [
+        "Includes 6 sticks of Gatorlyte Rapid Rehydration powder, each stick makes 16.9 oz (500ml) of Gatorlyte, Watermelon flavor",
+        "Same great product as Gatorlyte Ready to Drink, but in convenient powder form.",
+        "Scientifically formulated for rapid rehydration to help quickly replace the fluids and electrolytes lost in sweat",
+        "Specialized blend of 5 electrolytes: Sodium, Potassium, Chloride, Magnesium, and Calcium",
+        "Made with no artificial sweeteners or flavors",
+        "Lower Sugar: Made with 60% lower sugar than leading sports drink, Gatorlyte contains 10g total sugars per 16.9 fl oz serving, the leading sports drink contains 32g sugars per 16.9 fl oz serving."
+      ],
+      "description": "Scientifically formulated for rapid rehydration to help quickly replace the fluids and electrolytes lost in sweat.",
+      "description_format": "text",
+      "brand": "Gatorlyte",
+      "rating": 4.7,
+      "reviews": 14872,
+      "price": "$15.99",
+      "url": "https://www.amazon.com/dp/B0BGR6842K",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/f2409b1ca6520e8e4b2edba9d71dc0de.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/b3ef317fff0fa5b70b271f3e912bbfc4.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/161e9bc3e719eda4af268039d0bb3a9c.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/17ad174a3f70ec02a660403196f28caa.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/020424dd25049491ba14c4063411f6c3.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/05/c30ce537e59f741d6e5dabbbd8fcc1fc.res"
+      ],
+      "bestsellers_rank": []
+    },
+    {
+      "asin": "B07BWM3FJL",
+      "title": "Nuun Immunity Electrolyte Tablets with Vitamin D, C, E, & A, Ginger, Elderberry, Magnesium & 4 Other Essential Electrolytes, Vegan, Orange Citrus, 8 Pack (80 Servings Total)",
+      "bullets": [
+        "HYDRATION WITH IMMUNE SUPPORT: Nuun Immunity is an immune support electrolyte tablet with 200mg of Vitamin C plus Vitamin A, D & E, along with minerals, electrolytes, and more",
+        "5 ESSENTIAL ELECTROLYTES: These Nuun electrolyte tablets include 5 essential electrolytes to help you hydrate and stay hydrated, plus nutrients to nourish your immune system; electrolytes included are Potassium, Sodium, Chloride, Magnesium, and Calcium",
+        "BOTANICALS, MINERALS & VITAMINS: Nuun Immunity tablets include zinc, selenium, turmeric, ginger, echinacea, and elderberry to support everyday health and wellness",
+        "VEGAN, NON-GMO, AND 2g OF SUGAR: Nuun Immunity is made with clean*, plant-based ingredients, is gluten free, vegan, kosher, and non-GMO; and each tablet contains 2g of sugar",
+        "REFRESHING FLAVOR: This 8 pack contains 8 tubes (10 tablets each) of Nuun Orange Citrus flavor for a total of 80 servings; the tubes are perfect to take on-the-go for whenever you want a refreshing electrolyte supplement"
+      ],
+      "description": "Nuun Immunity electrolyte tablets deliver powerful immune support through a scientifically formulated blend designed to support your immune system. Each tablet combines elderberry and zinc with turmeric, echinacea, ginger, and 200mg of Vitamin C, plus five essential electrolytes for comprehensive wellness. Electrolytes include Calcium (15 mg), Magnesium (15 mg), Chloride (40 mg), Sodium (100 mg), and Potassium (150 mg). These vegan-friendly tablets dissolve easily in 16 fl oz of water (hot or cold) to create a refreshing orange citrus flavored drink with 15 calories per serving. The convenient tablet form makes it easy to maintain your daily immune system routine ? simply drop one tablet in water, let it fizz for a few minutes, and enjoy. Nuun is the #1 electrolyte tablet brand, and proudly offers this clean* immune-supporting formula, that's both hydrating and delicious. *Clean is defined as non-GMO, vegan, and gluten free. **These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. ***Electrolyte levels based on the ratio of Sodium, Chloride, Potassium in our products. See Nuun's website for more details.",
+      "description_format": "text",
+      "brand": "Nuun",
+      "rating": 4.6,
+      "reviews": 21438,
+      "price": "$28.00",
+      "url": "https://www.amazon.com/dp/B07BWM3FJL",
+      "categories": [
+        "Health & Household",
+        "Diet & Sports Nutrition",
+        "Sports Nutrition",
+        "Electrolyte Replacements"
+      ],
+      "images": [
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/c20e91caaf71cd406f4eb5eec1399353.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/c67f36cfad10c73d5f387856af973b9a.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/cfd78be537f4d999e3843d0bf3606eab.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/4458018ddfaeda01d163637434c8f084.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/0fa532c943fae2b09772360701703c05.res",
+        "https://storage.googleapis.com/ef-prod-gather-v2/storage/Amazon-US/resources/detail/2025/07/27c4b8d160f04506805cde01f9e6b631.res"
+      ],
+      "bestsellers_rank": []
     }
   ]
 }
